@@ -1,0 +1,232 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Fh-FrankenUI",
+    "section": "",
+    "text": "Warning\n\n\n\nThis library is in development and not ready for production use. There will be lots of unexpected bugs/breaking changes as development continues. Please use at your own risk.",
+    "crumbs": [
+      "Fh-FrankenUI"
+    ]
+  },
+  {
+    "objectID": "core.html",
+    "href": "core.html",
+    "title": "Core",
+    "section": "",
+    "text": "from nbdev.showdoc import show_doc\nfrom IPython.display import HTML",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#imports",
+    "href": "core.html#imports",
+    "title": "Core",
+    "section": "",
+    "text": "from nbdev.showdoc import show_doc\nfrom IPython.display import HTML",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#utils",
+    "href": "core.html#utils",
+    "title": "Core",
+    "section": "Utils",
+    "text": "Utils\n\nTests\n\nfrom fastcore.test import *\n\n\ndef test_xml_eq(a, b):\n    \"Tests if if 2 FT components generate the same xml\"\n    test_eq(*map(lambda x: x if isinstance(x,str) else to_xml(x), (a, b)))\n\n\n\nOther\n\nsource\n\n\nstringify\n\n stringify (o)\n\nConverts input types into strings that can be passed to FT components\n\n\n\n\nDetails\n\n\n\n\no\nString, Tuple, or Enum options we want stringified\n\n\n\n\nassert stringify('abc') == 'abc'\nassert stringify(('abc','def')) == 'abc def'\nassert 'uk-input ' + stringify(()) == 'uk-input '\nassert 'uk-input ' + stringify(\"\") == 'uk-input '\n\n\nsource\n\n\nVEnum\n\n VEnum (value, names=None, module=None, qualname=None, type=None, start=1)\n\nAn enumeration.\n\nclass TestT(VEnum):\n    foo = 'foo'\n    baz = 'baaz'\n\nassert str(TestT.baz) == 'uk-test-baaz'\nassert TestT.baz + TestT.foo + ' bar' == 'uk-test-baaz uk-test-foo bar'\nassert stringify((TestT.baz, TestT.foo, 'bar')) == 'uk-test-baaz uk-test-foo bar'",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#theme",
+    "href": "core.html#theme",
+    "title": "Core",
+    "section": "Theme",
+    "text": "Theme\nYou can select a theme color to and get all the headers. This brings in the most standard grouping: + Tailwind: Optional, but typically FrankenUI is used in conjunction with tailwind + Uikit: Many things are styled with uikit + UIkit icons: Gives many icons OOTB, and is nice to have handy. + Franken WC: Neccesary for some of the (minimal) interactivity components have\n\nsource\n\nTheme\n\n Theme (value, names=None, module=None, qualname=None, type=None, start=1)\n\nAn enumeration.\n\nhdrs = Theme.blue.headers()\napp = FastHTML(hdrs=hdrs)",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#text-style",
+    "href": "core.html#text-style",
+    "title": "Core",
+    "section": "Text Style",
+    "text": "Text Style\n\nB (Base)\nBase enums all will end with B. These are designed to make classes discoverable in python. These should be generally a 1:1 mapping to a class.\nThese are the lowest level class selection options without dropping into strings. We don’t need to cover everything, but we want most useful things in here.\n\nsource\n\n\nTextB\n\n TextB (value, names=None, module=None, qualname=None, type=None, start=1)\n\nAn enumeration.\n\nprint(TextB.sz_xsmall)\n\ntext-xs\n\n\n\n\nT (Transform)\nTransform enums all will end with T. These are designed to make useful class groups discoverable in python.\nEach option should be a group of enums that are useful in many cases. For example muted_sm is very commonly used as a subheader below a card title and looks great. These should be high level things that users can generally just pick from to have a decent default without much thought.\n\nsource\n\n\nTextT\n\n TextT (value, names=None, module=None, qualname=None, type=None, start=1)\n\nAn enumeration.\n\nprint(TextT.muted_sm)\n\ntext-sm uk-text-muted",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#icons-and-avatars",
+    "href": "core.html#icons-and-avatars",
+    "title": "Core",
+    "section": "Icons and Avatars",
+    "text": "Icons and Avatars\n\nsource\n\nUkIcon\n\n UkIcon (icon, ratio=1, cls=())\n\nCreates a Span with the given icon\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nicon\n\n\nIcon name from https://getuikit.com/docs/icon\n\n\nratio\nint\n1\nIcon ratio/size\n\n\ncls\ntuple\n()\nSpan classes\n\n\n\n\nUkIcon('heart', 0.5)\n\n&lt;span uk-icon=\"icon: heart; ratio: 0.5\"&gt;&lt;/span&gt;\n\n\n\nsource\n\n\nDiceBearAvatar\n\n DiceBearAvatar (seed_name, h, w)\n\n\n\n\n\nDetails\n\n\n\n\nseed_name\nSeed name (ie ‘Isaac Flath’)\n\n\nh\nHeight\n\n\nw\nWidth\n\n\n\n\nDiceBearAvatar('Isaac Flath', 10, 10)\n\n&lt;span class=\"relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full bg-accent\"&gt;&lt;img alt=\"Avatar\" src=\"https://api.dicebear.com/8.x/lorelei/svg?seed=Isaac Flath\" class=\"aspect-square h-full w-full\"&gt;&lt;/span&gt;",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#spacing-flexbox-grid",
+    "href": "core.html#spacing-flexbox-grid",
+    "title": "Core",
+    "section": "Spacing | Flexbox | Grid",
+    "text": "Spacing | Flexbox | Grid\nThe most common pattern for spacing it to organize the general high level page layout with a Grid, and smaller components with Flex.\n\n\n\n\n\n\nTip\n\n\n\nPlay Flex Box Froggy to get an understanding of flex box.\n\n\n\nsource\n\nFlexT\n\n FlexT (value, names=None, module=None, qualname=None, type=None, start=1)\n\nAn enumeration.\n\n\nExported source\nclass FlexT(VEnum):\n    block       = ''\n    inline      = 'inline'\n    #horizontal\n    left        = 'left'\n    center      = 'center'\n    right       = 'right'\n    between     = 'between'\n    around      = 'around'\n    #vertical\n    stretch     = 'stretch'\n    top         = 'top'\n    middle      = 'middle'\n    botton      = 'bottom'\n    #direction\n    row         = 'row'\n    row_reverse = 'row-reverse'\n    col         = 'col'\n    col_reverse = 'col-reverse'\n    #wrap\n    nowrap      = 'nowrap'\n    wrap        = 'wrap'\n    wrap_reverse= 'wrap-reverse'\n\n\n\nDiv(cls=(FlexT.block,FlexT.left,FlexT.middle,'some_cls'))\n\n&lt;div class=\"uk-flex uk-flex-left uk-flex-middle some_cls\"&gt;&lt;/div&gt;\n\n\n\nsource\n\n\nGridT\n\n GridT (value, names=None, module=None, qualname=None, type=None, start=1)\n\nAn enumeration.\n\n\nExported source\nclass GridT(VEnum):\n    # gap\n    small  = 'small'\n    medium = 'medium'\n    large  = 'large'\n    none   = 'collapse'\n\n\n\nsource\n\n\nGrid\n\n Grid (*c, cols=3, cls=(), **kwargs)\n\nCreates a grid with the given number of columns, often used for a grid of cards\n\nGrid(*map(Div, range(6)),cols=3, cls=GridT.small)\n\n&lt;div class=\"grid grid-cols-3 uk-grid-small\"&gt;\n  &lt;div&gt;0&lt;/div&gt;\n  &lt;div&gt;1&lt;/div&gt;\n  &lt;div&gt;2&lt;/div&gt;\n  &lt;div&gt;3&lt;/div&gt;\n  &lt;div&gt;4&lt;/div&gt;\n  &lt;div&gt;5&lt;/div&gt;\n&lt;/div&gt;\n\n\n\nsource\n\n\nResponsiveGrid\n\n ResponsiveGrid (*c, sm=1, md=2, lg=3, xl=4, gap=2, cls='', **kwargs)\n\nCreates a responsive grid with the given number of columns for different screen sizes\nWe can use the FlexT enum above to create Divs that arrange components in a flex box in different ways.\nFor example, FullySpacedDiv applies a very common pattern so we’ve made a function that helps to this for you. But if you look at the code, it’s really just using the enum to apply the right combonation of flex classes.\n\nsource\n\n\nFullySpacedDiv\n\n FullySpacedDiv (*c, cls='uk-width-1-1', **kwargs)\n\nCreates a flex div with it’s components having as much space between them as possible\n\n\nExported source\ndef FullySpacedDiv(*c,                # Components\n                   cls='uk-width-1-1',# Classes for outer div\n                   **kwargs           # Additional args for outer div\n                  ):                  # Div with spaced components via flex classes\n    \"Creates a flex div with it's components having as much space between them as possible\"\n    cls = stringify(cls)\n    return Div(cls=(FlexT.block,FlexT.between,FlexT.middle,cls), **kwargs)(*c)\n\n\n\nFullySpacedDiv(*map(P, range(3)))\n\n&lt;div class=\"uk-flex uk-flex-between uk-flex-middle uk-width-1-1\"&gt;\n  &lt;p&gt;0&lt;/p&gt;\n  &lt;p&gt;1&lt;/p&gt;\n  &lt;p&gt;2&lt;/p&gt;\n&lt;/div&gt;\n\n\n\nsource\n\n\nCenteredDiv\n\n CenteredDiv (*c, cls=(), **kwargs)\n\nCreates a flex div with it’s components centered in it\n\nCenteredDiv(*map(P, range(3)))\n\n&lt;div class=\"uk-flex uk-flex-col uk-flex-middle uk-flex-center \"&gt;\n  &lt;p&gt;0&lt;/p&gt;\n  &lt;p&gt;1&lt;/p&gt;\n  &lt;p&gt;2&lt;/p&gt;\n&lt;/div&gt;\n\n\n\nsource\n\n\nLAlignedDiv\n\n LAlignedDiv (*c, cls=(), **kwargs)\n\nCreates a flex div with it’s components aligned to the left\n\nLAlignedDiv(*map(P, range(3)))\n\n&lt;div class=\"uk-flex uk-flex-left uk-flex-middle \"&gt;\n  &lt;p&gt;0&lt;/p&gt;\n  &lt;p&gt;1&lt;/p&gt;\n  &lt;p&gt;2&lt;/p&gt;\n&lt;/div&gt;\n\n\n\nsource\n\n\nRAlignedDiv\n\n RAlignedDiv (*c, cls=(), **kwargs)\n\nCreates a flex div with it’s components aligned to the right\n\nRAlignedDiv(*map(P, range(3)))\n\n&lt;div class=\"uk-flex uk-flex-right uk-flex-middle \"&gt;\n  &lt;p&gt;0&lt;/p&gt;\n  &lt;p&gt;1&lt;/p&gt;\n  &lt;p&gt;2&lt;/p&gt;\n&lt;/div&gt;\n\n\n\nsource\n\n\nVStackedDiv\n\n VStackedDiv (*c, cls='', **kwargs)\n\n\nsource\n\n\nHStackedDiv\n\n HStackedDiv (*c, cls='', **kwargs)\n\n\nsource\n\n\nSpaceBetweenDiv\n\n SpaceBetweenDiv (*c, cls='', **kwargs)",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#basic-inputs",
+    "href": "core.html#basic-inputs",
+    "title": "Core",
+    "section": "Basic Inputs",
+    "text": "Basic Inputs\nInputs of various types often go with a label. Because of this we created functions to do this for you along with properly linking the for attribute from the lable to the input. We also have some nice defaults, such as putting a little spacing between the label and the input\n\nsource\n\nUkGenericInput\n\n UkGenericInput (input_fn:fastcore.xml.FT, label:str|fastcore.xml.FT=(),\n                 lbl_cls:str|enum.Enum=(), inp_cls:str|enum.Enum='',\n                 cls:str|enum.Enum=('space-y-2',), id:str='', **kwargs)\n\nDiv(Label,Input) component with Uk styling injected appropriately. Generally you should higher level API, such as UKTextArea which is created for you in this library\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\ninput_fn\nFT\n\nFT Components that generates a user input (e.g. TextArea)\n\n\nlabel\nstr | fastcore.xml.FT\n()\nString or FT component that goes in Label\n\n\nlbl_cls\nstr | enum.Enum\n()\nAdditional classes that goes in Label\n\n\ninp_cls\nstr | enum.Enum\n\nAdditional classes that go in user input (e.g. TextArea)\n\n\ncls\nstr | enum.Enum\n(‘space-y-2’,)\nDiv cls\n\n\nid\nstr\n\nID of the user input (e.g. TextArea)\n\n\nkwargs\n\n\n\n\n\nReturns\nFT\n\nFT component in structure (Div(label,input))\n\n\n\n\nsource\n\n\nUkInput\n\n UkInput (*args, inp_cls='', label:str|fastcore.xml.FT=(),\n          lbl_cls:str|enum.Enum=(), cls:str|enum.Enum=('space-y-2',),\n          id:str='')\n\nCreates a text input with uk styling\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nargs\n\n\n\n\n\ninp_cls\nstr | enum.Enum\n\nAdditional classes that go in user input (e.g. TextArea)\n\n\nlabel\nstr | fastcore.xml.FT\n()\nString or FT component that goes in Label\n\n\nlbl_cls\nstr | enum.Enum\n()\nAdditional classes that goes in Label\n\n\ncls\nstr | enum.Enum\n(‘space-y-2’,)\nDiv cls\n\n\nid\nstr\n\nID of the user input (e.g. TextArea)\n\n\nReturns\nFT\n\nFT component in structure (Div(label,input))\n\n\n\n\nUkInput('myLabel', id='my_id')\n\n&lt;div class=\"space-y-2\"&gt;\n&lt;label for=\"my_id\" class=\"uk-form-label \"&gt;myLabel&lt;/label&gt;  &lt;input class=\"uk-input \"&gt;\n&lt;/div&gt;\n\n\n\nsource\n\n\nUkSwitch\n\n UkSwitch (*args, inp_cls='', label:str|fastcore.xml.FT=(),\n           lbl_cls:str|enum.Enum=(), cls:str|enum.Enum=('space-y-2',),\n           id:str='')\n\nCreates a switch input with uk styling\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nargs\n\n\n\n\n\ninp_cls\nstr | enum.Enum\n\nAdditional classes that go in user input (e.g. TextArea)\n\n\nlabel\nstr | fastcore.xml.FT\n()\nString or FT component that goes in Label\n\n\nlbl_cls\nstr | enum.Enum\n()\nAdditional classes that goes in Label\n\n\ncls\nstr | enum.Enum\n(‘space-y-2’,)\nDiv cls\n\n\nid\nstr\n\nID of the user input (e.g. TextArea)\n\n\nReturns\nFT\n\nFT component in structure (Div(label,input))\n\n\n\n\nUkSwitch(cls='')\n\n&lt;div&gt;\n  &lt;input type=\"hidden\" skip&gt;\n  &lt;input type=\"checkbox\" value=\"1\" class=\"uk-toggle-switch uk-form-switch \"&gt;\n&lt;/div&gt;\n\n\n\nsource\n\n\nUkCheckbox\n\n UkCheckbox (*args, inp_cls='', label:str|fastcore.xml.FT=(),\n             lbl_cls:str|enum.Enum=(), cls:str|enum.Enum=('space-y-2',),\n             id:str='')\n\nCreates a checkbox input with uk styling\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nargs\n\n\n\n\n\ninp_cls\nstr | enum.Enum\n\nAdditional classes that go in user input (e.g. TextArea)\n\n\nlabel\nstr | fastcore.xml.FT\n()\nString or FT component that goes in Label\n\n\nlbl_cls\nstr | enum.Enum\n()\nAdditional classes that goes in Label\n\n\ncls\nstr | enum.Enum\n(‘space-y-2’,)\nDiv cls\n\n\nid\nstr\n\nID of the user input (e.g. TextArea)\n\n\nReturns\nFT\n\nFT component in structure (Div(label,input))\n\n\n\n\nUkCheckbox('myLabel', inp_cls='another_class')\n\n&lt;div class=\"space-y-2\"&gt;\n&lt;label class=\"uk-form-label \"&gt;myLabel&lt;/label&gt;  &lt;input type=\"hidden\" skip&gt;\n  &lt;input type=\"checkbox\" value=\"1\" class=\"uk-checkbox another_class\"&gt;\n&lt;/div&gt;\n\n\n\nsource\n\n\nUkTextArea\n\n UkTextArea (*args, inp_cls='', label:str|fastcore.xml.FT=(),\n             lbl_cls:str|enum.Enum=(), cls:str|enum.Enum=('space-y-2',),\n             id:str='')\n\nCreates a textarea with uk styling\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nargs\n\n\n\n\n\ninp_cls\nstr | enum.Enum\n\nAdditional classes that go in user input (e.g. TextArea)\n\n\nlabel\nstr | fastcore.xml.FT\n()\nString or FT component that goes in Label\n\n\nlbl_cls\nstr | enum.Enum\n()\nAdditional classes that goes in Label\n\n\ncls\nstr | enum.Enum\n(‘space-y-2’,)\nDiv cls\n\n\nid\nstr\n\nID of the user input (e.g. TextArea)\n\n\nReturns\nFT\n\nFT component in structure (Div(label,input))\n\n\n\n\nUkTextArea('myLabel', lbl_cls='another_class')\n\n&lt;div class=\"space-y-2\"&gt;\n&lt;label class=\"uk-form-label another_class\"&gt;myLabel&lt;/label&gt;&lt;textarea class=\"uk-textarea \"&gt;&lt;/textarea&gt;&lt;/div&gt;\n\n\n\nsource\n\n\nUkFormLabel\n\n UkFormLabel (*args, inp_cls='', label:str|fastcore.xml.FT=(),\n              lbl_cls:str|enum.Enum=(), cls:str|enum.Enum=('space-y-2',),\n              id:str='')\n\nCreates a form label with uk styling\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nargs\n\n\n\n\n\ninp_cls\nstr | enum.Enum\n\nAdditional classes that go in user input (e.g. TextArea)\n\n\nlabel\nstr | fastcore.xml.FT\n()\nString or FT component that goes in Label\n\n\nlbl_cls\nstr | enum.Enum\n()\nAdditional classes that goes in Label\n\n\ncls\nstr | enum.Enum\n(‘space-y-2’,)\nDiv cls\n\n\nid\nstr\n\nID of the user input (e.g. TextArea)\n\n\nReturns\nFT\n\nFT component in structure (Div(label,input))\n\n\n\n\nUkFormLabel('myLabel', lbl_cls=TextT.muted_sm)\n\n&lt;div class=\"space-y-2\"&gt;\n&lt;label class=\"uk-form-label text-sm uk-text-muted\"&gt;myLabel&lt;/label&gt;&lt;uk-input-tag class=\"uk-form-label \"&gt;&lt;/uk-input-tag&gt;&lt;/div&gt;",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#buttons",
+    "href": "core.html#buttons",
+    "title": "Core",
+    "section": "Buttons",
+    "text": "Buttons\n\nsource\n\nUkButtonT\n\n UkButtonT (value, names=None, module=None, qualname=None, type=None,\n            start=1)\n\nAn enumeration.\n\nsource\n\n\nUkButton\n\n UkButton (*c, cls=&lt;UkButtonT.default: 'default'&gt;, **kwargs)\n\nCreates a button with uk styling\n\nUkButton('MyButton', cls=UkButtonT.primary)\n\n&lt;button type=\"button\" class=\"uk-button uk-button-primary\"&gt;MyButton&lt;/button&gt;\n\n\n\nsource\n\n\nUkIconButton\n\n UkIconButton (*c, sz='small', cls=(), **kwargs)\n\nCreates an IconButton with uk styling\n\nUkIconButton(UkIcon('home'))\n\n&lt;button class=\"uk-icon-button uk-icon-button-small \"&gt;&lt;span uk-icon=\"icon: home; ratio: 1\"&gt;&lt;/span&gt;&lt;/button&gt;",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#drop-downs",
+    "href": "core.html#drop-downs",
+    "title": "Core",
+    "section": "Drop Downs",
+    "text": "Drop Downs\n\nsource\n\nOptions\n\n Options (*c, selected_idx:int=None, disabled_idxs:set=None)\n\nHelper function to wrap things into Options for use in UKSelect\n\nlist(map(to_xml,Options('option1','option2','option3', selected_idx=1, disabled_idxs={0,2})))\n\n['&lt;option disabled&gt;option1&lt;/option&gt;',\n '&lt;option selected&gt;option2&lt;/option&gt;',\n '&lt;option disabled&gt;option3&lt;/option&gt;']\n\n\n\nsource\n\n\nUkSelect\n\n UkSelect (*option, label=(), lbl_cls=(), inp_cls=(), cls=('space-y-2',),\n           id='', name='', placeholder='', searchable=False, **kwargs)\n\nCreates a select dropdown with uk styling\n\nUkSelect(*Options('a', 'b'), label='MyLabel', placeholder='MyPlaceholder')\n\n&lt;div class=\"space-y-2\"&gt;\n&lt;label class=\"uk-form-label \"&gt;MyLabel&lt;/label&gt;&lt;uk-select uk-cloak placeholder=\"MyPlaceholder\"&gt;&lt;option&gt;a&lt;/option&gt;&lt;option&gt;b&lt;/option&gt;&lt;/uk-select&gt;&lt;/div&gt;\n\n\n\nsource\n\n\nUkDropdownButton\n\n UkDropdownButton (*opt_grp, opt_hdrs=None, label=None,\n                   btn_cls=&lt;UkButtonT.default: 'default'&gt;, cls=(),\n                   dd_cls=(), icon='triangle-down', icon_cls='',\n                   icon_position='right')\n\n\n# UkDropdownButton((A('Option 1.1', _href='#'), A('Option 1.2', _href='#')), \n#                  (A('Option 2.1', _href='#'), A('Option 2.2', _href='#')),\n#                  opt_hdrs=('Header 1', 'Header 2'))",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#headings",
+    "href": "core.html#headings",
+    "title": "Core",
+    "section": "Headings",
+    "text": "Headings\n\nsource\n\nUkGenericComponent\n\n UkGenericComponent (component_fn, *c, cls=(), **kwargs)\n\n\nsource\n\n\nUkH6\n\n UkH6 (*c, cls=(), **kwargs)\n\n\nsource\n\n\nUkH5\n\n UkH5 (*c, cls=(), **kwargs)\n\n\nsource\n\n\nUkH4\n\n UkH4 (*c, cls=(), **kwargs)\n\n\nsource\n\n\nUkH3\n\n UkH3 (*c, cls=(), **kwargs)\n\n\nsource\n\n\nUkH2\n\n UkH2 (*c, cls=(), **kwargs)\n\n\nsource\n\n\nUkH1\n\n UkH1 (*c, cls=(), **kwargs)\n\n\nUkH1('My Uk styled header',cls='another-class')\n\n&lt;h1 class=\"uk-h1 another-class\"&gt;My Uk styled header&lt;/h1&gt;",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#dividers",
+    "href": "core.html#dividers",
+    "title": "Core",
+    "section": "Dividers",
+    "text": "Dividers\n\nsource\n\nUkHSplit\n\n UkHSplit (*c, cls=(), line_cls=(), text_cls=())\n\n\nsource\n\n\nUkHLine\n\n UkHLine (lwidth=2, y_space=4)\n\n\nsource\n\n\nUkNavDivider\n\n UkNavDivider ()",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#navbar",
+    "href": "core.html#navbar",
+    "title": "Core",
+    "section": "NavBar",
+    "text": "NavBar\n\nsource\n\nUkNavbarDropdown\n\n UkNavbarDropdown (*c, label, href='#', cls='', has_header=False,\n                   **kwargs)\n\n\nsource\n\n\nUkNavbar\n\n UkNavbar (lnav:Sequence[Union[str,fastcore.xml.FT]]=None,\n           rnav:Sequence[Union[str,fastcore.xml.FT]]=None, cls='',\n           **kwargs)",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#sidebar",
+    "href": "core.html#sidebar",
+    "title": "Core",
+    "section": "Sidebar",
+    "text": "Sidebar\n\nsidebar_items = [\"Profile\", \"Account\", \"Appearance\", \"Notifications\", \"Display\"]\ntst = Ul(cls='uk-nav-primary', uk_switcher=\"connect: #component-nav; animation: uk-animation-fade\")(\n                            *map(lambda x: Li(A(x)),sidebar_items))\n\n\nsource\n\nUkSidebar\n\n UkSidebar (*ul, cls='space-y-4 p-4', **kwargs)\n\nCreates a styled sidebar component\n\nsidebar_items = [\"Profile\", \"Account\"]\ntst = Ul(cls='uk-nav-primary')(*map(lambda x: Li(A(x)),sidebar_items))\nUkSidebar(tst)\n\n&lt;div class=\"space-y-4 p-4\"&gt;\n  &lt;ul class=\"uk-nav-primary uk-nav \"&gt;\n    &lt;li&gt;\n&lt;a href=\"#\"&gt;Profile&lt;/a&gt;    &lt;/li&gt;\n    &lt;li&gt;\n&lt;a href=\"#\"&gt;Account&lt;/a&gt;    &lt;/li&gt;\n  &lt;/ul&gt;\n&lt;/div&gt;",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#navtab",
+    "href": "core.html#navtab",
+    "title": "Core",
+    "section": "Navtab",
+    "text": "Navtab\n\nsource\n\nUkTab\n\n UkTab (*items, maxw=96, cls='', **kwargs)\n\n\nsource\n\n\nNavTab\n\n NavTab (text, active=False)",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#cards",
+    "href": "core.html#cards",
+    "title": "Core",
+    "section": "Cards",
+    "text": "Cards\n\nsource\n\nCard\n\n Card (*c, header=None, footer=None, body_cls='space-y-6', header_cls=(),\n       footer_cls=(), cls=(), **kwargs)",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#modals",
+    "href": "core.html#modals",
+    "title": "Core",
+    "section": "Modals",
+    "text": "Modals\n\nsource\n\nModal\n\n Modal (*c, header=None, footer=None, body_cls='space-y-6',\n        header_cls='p-6', footer_cls=(), cls=(), **kwargs)\n\n\nsource\n\n\nUkModalTitle\n\n UkModalTitle (*c, cls=())",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#tables",
+    "href": "core.html#tables",
+    "title": "Core",
+    "section": "Tables",
+    "text": "Tables\n\ndef render_header(col):\n    cls = 'p-2 ' + 'uk-table-shrink' if col in ('Done','Actions') else ''\n    return Th(col, cls=cls)\n\ndef render_cell(col, row):\n    match col:\n        case \"ColA\":  return Td(row[col], cls=TextT.muted_sm)\n        case \"ColB\":  return Td(row[col], cls=TextT.medium_sm)\n        case 'ColC':  return Td(row[col])\n        case 'ColD':  return Td(row[col], cls='p-2')\n        \ncols = ('ColA', 'ColB', 'ColC', 'ColD')\ndata = [{'ColA':1, 'ColB':2, 'ColC':3, 'ColD':4},]\n# UkTable(cols, data, cell_render=render_cell, header_render=render_header)\n\n\nsource\n\nTableHeader\n\n TableHeader (columns, header_render=None)\n\n\nsource\n\n\nTableRow\n\n TableRow (row, columns, cell_render=None)\n\n\nsource\n\n\nUkTable\n\n UkTable (columns, data, *args, cls=(), footer=None, cell_render=None,\n          header_render=None, **kwargs)\n\n\nUkTable(cols,data)\n\n&lt;table class=\"uk-table uk-table-middle uk-table-divider uk-table-hover uk-table-small \"&gt;\n  &lt;thead&gt;\n    &lt;th&gt;\n      &lt;th class=\"p-2\"&gt;ColA&lt;/th&gt;\n      &lt;th class=\"p-2\"&gt;ColB&lt;/th&gt;\n      &lt;th class=\"p-2\"&gt;ColC&lt;/th&gt;\n      &lt;th class=\"p-2\"&gt;ColD&lt;/th&gt;\n    &lt;/th&gt;\n  &lt;/thead&gt;\n  &lt;tbody&gt;\n    &lt;tr&gt;\n      &lt;td class=\"p-2\"&gt;1&lt;/td&gt;\n      &lt;td class=\"p-2\"&gt;2&lt;/td&gt;\n      &lt;td class=\"p-2\"&gt;3&lt;/td&gt;\n      &lt;td class=\"p-2\"&gt;4&lt;/td&gt;\n    &lt;/tr&gt;\n  &lt;/tbody&gt;\n&lt;/table&gt;\n\n\nHow do I fix that error?\n\n# Let's inspect the data structure to understand why we're getting this error\nprint(\"Columns:\", cols)\nprint(\"\\nData:\")\nfor item in data:\n    print(item)\n\n# Let's also check the type of each item in data\nprint(\"\\nTypes in data:\")\nfor item in data:\n    print(type(item))\n\n# If data contains dictionaries as expected, let's try to access a key\nif data and isinstance(data[0], dict):\n    print(\"\\nFirst item keys:\", list(data[0].keys()))\n    print(\"First item values:\", list(data[0].values()))\nelse:\n    print(\"\\nData is not in the expected format (list of dictionaries)\")\n\n# Let's modify the UkTable function to handle both dictionary and non-dictionary data\ndef UkTable(columns, data, *args, cls=(), footer=None, cell_render=None, header_render=None, **kwargs):\n    table_cls = 'uk-table uk-table-middle uk-table-divider uk-table-hover uk-table-small ' + stringify(cls)\n    \n    if data and isinstance(data[0], dict):\n        cell_render = ifnone(cell_render, lambda c, r: Td(cls='p-2')(r[c]))\n    else:\n        cell_render = ifnone(cell_render, lambda c, r: Td(cls='p-2')(r))\n    \n    header_render = ifnone(header_render, lambda c: Th(cls='p-2')(c))\n    \n    head = Thead(Tr(*map(header_render, columns)))\n    \n    if data and isinstance(data[0], dict):\n        body = Tbody(*[Tr(*map(lambda c: cell_render(c, row), columns)) for row in data])\n    else:\n        body = Tbody(*[Tr(*map(lambda val: cell_render(None, val), row)) for row in data])\n    \n    if footer:\n        table_content.append(Tfoot(footer))\n    \n    return Table(cls=table_cls, *args, **kwargs)(head, body)\n\n# Try the modified UkTable function\nprint(\"\\nModified UkTable output:\")\nprint(UkTable(cols, data))",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "core.html#forms",
+    "href": "core.html#forms",
+    "title": "Core",
+    "section": "Forms",
+    "text": "Forms\n\nsource\n\nUkFormSection\n\n UkFormSection (title, description, *c, button_txt='Update',\n                outer_margin=6, inner_margin=6)",
+    "crumbs": [
+      "Core"
+    ]
+  },
+  {
+    "objectID": "components.html",
+    "href": "components.html",
+    "title": "Components",
+    "section": "",
+    "text": "from nbdev.showdoc import show_doc\nfrom IPython.display import HTML\n\n\nsource\n\n\n\n NavP (*c, cls=&lt;TextT.muted_sm: (&lt;TextB.sz_small: 'text-sm'&gt;,\n       &lt;TextB.cl_muted: 'uk-text-muted'&gt;)&gt;)\n\n\nsource\n\n\n\n\n SpacedPP (left, right=None)\n\n\nsource\n\n\n\n\n SpacedPPs (*c)\n\n\nsource\n\n\n\n\n SpacedTxtIcon (txt, icon, ratio, icon_right=True)\n\n\nsource\n\n\n\n\n LAlignedTxtIcon (txt, icon='play-circle', cls='space-x-2', ratio=1,\n                  icon_right=True, txt_cls=None)\n\n\nsource\n\n\n\n\n LAlignedIconTxt (txt, icon, cls='space-x-2', ratio=1, txt_cls=None)",
+    "crumbs": [
+      "Components"
+    ]
+  },
+  {
+    "objectID": "components.html#imports",
+    "href": "components.html#imports",
+    "title": "Components",
+    "section": "",
+    "text": "from nbdev.showdoc import show_doc\nfrom IPython.display import HTML\n\n\nsource\n\n\n\n NavP (*c, cls=&lt;TextT.muted_sm: (&lt;TextB.sz_small: 'text-sm'&gt;,\n       &lt;TextB.cl_muted: 'uk-text-muted'&gt;)&gt;)\n\n\nsource\n\n\n\n\n SpacedPP (left, right=None)\n\n\nsource\n\n\n\n\n SpacedPPs (*c)\n\n\nsource\n\n\n\n\n SpacedTxtIcon (txt, icon, ratio, icon_right=True)\n\n\nsource\n\n\n\n\n LAlignedTxtIcon (txt, icon='play-circle', cls='space-x-2', ratio=1,\n                  icon_right=True, txt_cls=None)\n\n\nsource\n\n\n\n\n LAlignedIconTxt (txt, icon, cls='space-x-2', ratio=1, txt_cls=None)",
+    "crumbs": [
+      "Components"
+    ]
+  },
+  {
+    "objectID": "components.html#fonts",
+    "href": "components.html#fonts",
+    "title": "Components",
+    "section": "Fonts",
+    "text": "Fonts\n\nsource\n\nHelpText\n\n HelpText (c)",
+    "crumbs": [
+      "Components"
+    ]
+  }
+]

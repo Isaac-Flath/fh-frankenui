@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="The building blocks to the UI">
+
+<title>Core – fh-frankenui</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Core – fh-frankenui">
+<meta property="og:description" content="The building blocks to the UI">
+<meta property="og:site_name" content="fh-frankenui">
+<meta name="twitter:title" content="Core – fh-frankenui">
+<meta name="twitter:description" content="The building blocks to the UI">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">fh-frankenui</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./core.html">Core</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fh-FrankenUI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./core.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Core</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./components.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Components</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#imports" id="toc-imports" class="nav-link active" data-scroll-target="#imports">Imports</a></li>
+  <li><a href="#utils" id="toc-utils" class="nav-link" data-scroll-target="#utils">Utils</a>
+  <ul class="collapse">
+  <li><a href="#tests" id="toc-tests" class="nav-link" data-scroll-target="#tests">Tests</a></li>
+  <li><a href="#other" id="toc-other" class="nav-link" data-scroll-target="#other">Other</a></li>
+  <li><a href="#stringify" id="toc-stringify" class="nav-link" data-scroll-target="#stringify">stringify</a></li>
+  <li><a href="#venum" id="toc-venum" class="nav-link" data-scroll-target="#venum">VEnum</a></li>
+  </ul></li>
+  <li><a href="#theme" id="toc-theme" class="nav-link" data-scroll-target="#theme">Theme</a>
+  <ul class="collapse">
+  <li><a href="#theme-1" id="toc-theme-1" class="nav-link" data-scroll-target="#theme-1">Theme</a></li>
+  </ul></li>
+  <li><a href="#text-style" id="toc-text-style" class="nav-link" data-scroll-target="#text-style">Text Style</a>
+  <ul class="collapse">
+  <li><a href="#textb" id="toc-textb" class="nav-link" data-scroll-target="#textb">TextB</a></li>
+  <li><a href="#t-transform" id="toc-t-transform" class="nav-link" data-scroll-target="#t-transform"><code>T</code> (Transform)</a></li>
+  <li><a href="#textt" id="toc-textt" class="nav-link" data-scroll-target="#textt">TextT</a></li>
+  </ul></li>
+  <li><a href="#icons-and-avatars" id="toc-icons-and-avatars" class="nav-link" data-scroll-target="#icons-and-avatars">Icons and Avatars</a>
+  <ul class="collapse">
+  <li><a href="#ukicon" id="toc-ukicon" class="nav-link" data-scroll-target="#ukicon">UkIcon</a></li>
+  <li><a href="#dicebearavatar" id="toc-dicebearavatar" class="nav-link" data-scroll-target="#dicebearavatar">DiceBearAvatar</a></li>
+  </ul></li>
+  <li><a href="#spacing-flexbox-grid" id="toc-spacing-flexbox-grid" class="nav-link" data-scroll-target="#spacing-flexbox-grid">Spacing | Flexbox | Grid</a>
+  <ul class="collapse">
+  <li><a href="#flext" id="toc-flext" class="nav-link" data-scroll-target="#flext">FlexT</a></li>
+  <li><a href="#gridt" id="toc-gridt" class="nav-link" data-scroll-target="#gridt">GridT</a></li>
+  <li><a href="#grid" id="toc-grid" class="nav-link" data-scroll-target="#grid">Grid</a></li>
+  <li><a href="#responsivegrid" id="toc-responsivegrid" class="nav-link" data-scroll-target="#responsivegrid">ResponsiveGrid</a></li>
+  <li><a href="#fullyspaceddiv" id="toc-fullyspaceddiv" class="nav-link" data-scroll-target="#fullyspaceddiv">FullySpacedDiv</a></li>
+  <li><a href="#centereddiv" id="toc-centereddiv" class="nav-link" data-scroll-target="#centereddiv">CenteredDiv</a></li>
+  <li><a href="#laligneddiv" id="toc-laligneddiv" class="nav-link" data-scroll-target="#laligneddiv">LAlignedDiv</a></li>
+  <li><a href="#raligneddiv" id="toc-raligneddiv" class="nav-link" data-scroll-target="#raligneddiv">RAlignedDiv</a></li>
+  <li><a href="#vstackeddiv" id="toc-vstackeddiv" class="nav-link" data-scroll-target="#vstackeddiv">VStackedDiv</a></li>
+  <li><a href="#hstackeddiv" id="toc-hstackeddiv" class="nav-link" data-scroll-target="#hstackeddiv">HStackedDiv</a></li>
+  <li><a href="#spacebetweendiv" id="toc-spacebetweendiv" class="nav-link" data-scroll-target="#spacebetweendiv">SpaceBetweenDiv</a></li>
+  </ul></li>
+  <li><a href="#basic-inputs" id="toc-basic-inputs" class="nav-link" data-scroll-target="#basic-inputs">Basic Inputs</a>
+  <ul class="collapse">
+  <li><a href="#ukgenericinput" id="toc-ukgenericinput" class="nav-link" data-scroll-target="#ukgenericinput">UkGenericInput</a></li>
+  <li><a href="#ukinput" id="toc-ukinput" class="nav-link" data-scroll-target="#ukinput">UkInput</a></li>
+  <li><a href="#ukswitch" id="toc-ukswitch" class="nav-link" data-scroll-target="#ukswitch">UkSwitch</a></li>
+  <li><a href="#ukcheckbox" id="toc-ukcheckbox" class="nav-link" data-scroll-target="#ukcheckbox">UkCheckbox</a></li>
+  <li><a href="#uktextarea" id="toc-uktextarea" class="nav-link" data-scroll-target="#uktextarea">UkTextArea</a></li>
+  <li><a href="#ukformlabel" id="toc-ukformlabel" class="nav-link" data-scroll-target="#ukformlabel">UkFormLabel</a></li>
+  </ul></li>
+  <li><a href="#buttons" id="toc-buttons" class="nav-link" data-scroll-target="#buttons">Buttons</a>
+  <ul class="collapse">
+  <li><a href="#ukbuttont" id="toc-ukbuttont" class="nav-link" data-scroll-target="#ukbuttont">UkButtonT</a></li>
+  <li><a href="#ukbutton" id="toc-ukbutton" class="nav-link" data-scroll-target="#ukbutton">UkButton</a></li>
+  <li><a href="#ukiconbutton" id="toc-ukiconbutton" class="nav-link" data-scroll-target="#ukiconbutton">UkIconButton</a></li>
+  </ul></li>
+  <li><a href="#drop-downs" id="toc-drop-downs" class="nav-link" data-scroll-target="#drop-downs">Drop Downs</a>
+  <ul class="collapse">
+  <li><a href="#options" id="toc-options" class="nav-link" data-scroll-target="#options">Options</a></li>
+  <li><a href="#ukselect" id="toc-ukselect" class="nav-link" data-scroll-target="#ukselect">UkSelect</a></li>
+  <li><a href="#ukdropdownbutton" id="toc-ukdropdownbutton" class="nav-link" data-scroll-target="#ukdropdownbutton">UkDropdownButton</a></li>
+  </ul></li>
+  <li><a href="#headings" id="toc-headings" class="nav-link" data-scroll-target="#headings">Headings</a>
+  <ul class="collapse">
+  <li><a href="#ukgenericcomponent" id="toc-ukgenericcomponent" class="nav-link" data-scroll-target="#ukgenericcomponent">UkGenericComponent</a></li>
+  <li><a href="#ukh6" id="toc-ukh6" class="nav-link" data-scroll-target="#ukh6">UkH6</a></li>
+  <li><a href="#ukh5" id="toc-ukh5" class="nav-link" data-scroll-target="#ukh5">UkH5</a></li>
+  <li><a href="#ukh4" id="toc-ukh4" class="nav-link" data-scroll-target="#ukh4">UkH4</a></li>
+  <li><a href="#ukh3" id="toc-ukh3" class="nav-link" data-scroll-target="#ukh3">UkH3</a></li>
+  <li><a href="#ukh2" id="toc-ukh2" class="nav-link" data-scroll-target="#ukh2">UkH2</a></li>
+  <li><a href="#ukh1" id="toc-ukh1" class="nav-link" data-scroll-target="#ukh1">UkH1</a></li>
+  </ul></li>
+  <li><a href="#dividers" id="toc-dividers" class="nav-link" data-scroll-target="#dividers">Dividers</a>
+  <ul class="collapse">
+  <li><a href="#ukhsplit" id="toc-ukhsplit" class="nav-link" data-scroll-target="#ukhsplit">UkHSplit</a></li>
+  <li><a href="#ukhline" id="toc-ukhline" class="nav-link" data-scroll-target="#ukhline">UkHLine</a></li>
+  <li><a href="#uknavdivider" id="toc-uknavdivider" class="nav-link" data-scroll-target="#uknavdivider">UkNavDivider</a></li>
+  </ul></li>
+  <li><a href="#navbar" id="toc-navbar" class="nav-link" data-scroll-target="#navbar">NavBar</a>
+  <ul class="collapse">
+  <li><a href="#uknavbardropdown" id="toc-uknavbardropdown" class="nav-link" data-scroll-target="#uknavbardropdown">UkNavbarDropdown</a></li>
+  <li><a href="#uknavbar" id="toc-uknavbar" class="nav-link" data-scroll-target="#uknavbar">UkNavbar</a></li>
+  </ul></li>
+  <li><a href="#sidebar" id="toc-sidebar" class="nav-link" data-scroll-target="#sidebar">Sidebar</a>
+  <ul class="collapse">
+  <li><a href="#uksidebar" id="toc-uksidebar" class="nav-link" data-scroll-target="#uksidebar">UkSidebar</a></li>
+  </ul></li>
+  <li><a href="#navtab" id="toc-navtab" class="nav-link" data-scroll-target="#navtab">Navtab</a>
+  <ul class="collapse">
+  <li><a href="#uktab" id="toc-uktab" class="nav-link" data-scroll-target="#uktab">UkTab</a></li>
+  <li><a href="#navtab-1" id="toc-navtab-1" class="nav-link" data-scroll-target="#navtab-1">NavTab</a></li>
+  </ul></li>
+  <li><a href="#cards" id="toc-cards" class="nav-link" data-scroll-target="#cards">Cards</a>
+  <ul class="collapse">
+  <li><a href="#card" id="toc-card" class="nav-link" data-scroll-target="#card">Card</a></li>
+  </ul></li>
+  <li><a href="#modals" id="toc-modals" class="nav-link" data-scroll-target="#modals">Modals</a>
+  <ul class="collapse">
+  <li><a href="#modal" id="toc-modal" class="nav-link" data-scroll-target="#modal">Modal</a></li>
+  <li><a href="#ukmodaltitle" id="toc-ukmodaltitle" class="nav-link" data-scroll-target="#ukmodaltitle">UkModalTitle</a></li>
+  </ul></li>
+  <li><a href="#tables" id="toc-tables" class="nav-link" data-scroll-target="#tables">Tables</a>
+  <ul class="collapse">
+  <li><a href="#tableheader" id="toc-tableheader" class="nav-link" data-scroll-target="#tableheader">TableHeader</a></li>
+  <li><a href="#tablerow" id="toc-tablerow" class="nav-link" data-scroll-target="#tablerow">TableRow</a></li>
+  <li><a href="#uktable" id="toc-uktable" class="nav-link" data-scroll-target="#uktable">UkTable</a></li>
+  </ul></li>
+  <li><a href="#forms" id="toc-forms" class="nav-link" data-scroll-target="#forms">Forms</a>
+  <ul class="collapse">
+  <li><a href="#ukformsection" id="toc-ukformsection" class="nav-link" data-scroll-target="#ukformsection">UkFormSection</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Isaac-Flath/fh-frankenui/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Core</h1>
+</div>
+
+<div>
+  <div class="description">
+    The building blocks to the UI
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="imports" class="level2">
+<h2 class="anchored" data-anchor-id="imports">Imports</h2>
+<div id="cell-4" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nbdev.showdoc <span class="im">import</span> show_doc</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> HTML</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="utils" class="level2">
+<h2 class="anchored" data-anchor-id="utils">Utils</h2>
+<section id="tests" class="level3">
+<h3 class="anchored" data-anchor-id="tests">Tests</h3>
+<div id="cell-7" class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fastcore.test <span class="im">import</span> <span class="op">*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-8" class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_xml_eq(a, b):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"Tests if if 2 FT components generate the same xml"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    test_eq(<span class="op">*</span><span class="bu">map</span>(<span class="kw">lambda</span> x: x <span class="cf">if</span> <span class="bu">isinstance</span>(x,<span class="bu">str</span>) <span class="cf">else</span> to_xml(x), (a, b)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="other" class="level3">
+<h3 class="anchored" data-anchor-id="other">Other</h3>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L27" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="stringify" class="level3">
+<h3 class="anchored" data-anchor-id="stringify">stringify</h3>
+<blockquote class="blockquote">
+<pre><code> stringify (o)</code></pre>
+</blockquote>
+<p><em>Converts input types into strings that can be passed to FT components</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>o</td>
+<td>String, Tuple, or Enum options we want stringified</td>
+</tr>
+</tbody>
+</table>
+<div id="cell-11" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> stringify(<span class="st">'abc'</span>) <span class="op">==</span> <span class="st">'abc'</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> stringify((<span class="st">'abc'</span>,<span class="st">'def'</span>)) <span class="op">==</span> <span class="st">'abc def'</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'uk-input '</span> <span class="op">+</span> stringify(()) <span class="op">==</span> <span class="st">'uk-input '</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">'uk-input '</span> <span class="op">+</span> stringify(<span class="st">""</span>) <span class="op">==</span> <span class="st">'uk-input '</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L34" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="venum" class="level3">
+<h3 class="anchored" data-anchor-id="venum">VEnum</h3>
+<blockquote class="blockquote">
+<pre><code> VEnum (value, names=None, module=None, qualname=None, type=None, start=1)</code></pre>
+</blockquote>
+<p><em>An enumeration.</em></p>
+<div id="cell-13" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TestT(VEnum):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    foo <span class="op">=</span> <span class="st">'foo'</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    baz <span class="op">=</span> <span class="st">'baaz'</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">str</span>(TestT.baz) <span class="op">==</span> <span class="st">'uk-test-baaz'</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> TestT.baz <span class="op">+</span> TestT.foo <span class="op">+</span> <span class="st">' bar'</span> <span class="op">==</span> <span class="st">'uk-test-baaz uk-test-foo bar'</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> stringify((TestT.baz, TestT.foo, <span class="st">'bar'</span>)) <span class="op">==</span> <span class="st">'uk-test-baaz uk-test-foo bar'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="theme" class="level2">
+<h2 class="anchored" data-anchor-id="theme">Theme</h2>
+<p>You can select a theme color to and get all the headers. This brings in the most standard grouping: + Tailwind: Optional, but typically FrankenUI is used in conjunction with tailwind + Uikit: Many things are styled with uikit + UIkit icons: Gives many icons OOTB, and is nice to have handy. + Franken WC: Neccesary for some of the (minimal) interactivity components have</p>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L48" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="theme-1" class="level3">
+<h3 class="anchored" data-anchor-id="theme-1">Theme</h3>
+<blockquote class="blockquote">
+<pre><code> Theme (value, names=None, module=None, qualname=None, type=None, start=1)</code></pre>
+</blockquote>
+<p><em>An enumeration.</em></p>
+<div id="cell-17" class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>hdrs <span class="op">=</span> Theme.blue.headers()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>app <span class="op">=</span> FastHTML(hdrs<span class="op">=</span>hdrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="text-style" class="level2">
+<h2 class="anchored" data-anchor-id="text-style">Text Style</h2>
+<section id="b-base" class="level4">
+<h4 class="anchored" data-anchor-id="b-base"><code>B</code> (Base)</h4>
+<p>Base enums all will end with <code>B</code>. These are designed to make classes discoverable in python. These should be generally a 1:1 mapping to a class.</p>
+<p>These are the lowest level class selection options without dropping into strings. We don’t need to cover everything, but we want most useful things in here.</p>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L72" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="textb" class="level3">
+<h3 class="anchored" data-anchor-id="textb">TextB</h3>
+<blockquote class="blockquote">
+<pre><code> TextB (value, names=None, module=None, qualname=None, type=None, start=1)</code></pre>
+</blockquote>
+<p><em>An enumeration.</em></p>
+<div id="cell-22" class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(TextB.sz_xsmall)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>text-xs</code></pre>
+</div>
+</div>
+</section>
+<section id="t-transform" class="level3">
+<h3 class="anchored" data-anchor-id="t-transform"><code>T</code> (Transform)</h3>
+<p>Transform enums all will end with <code>T</code>. These are designed to make useful class groups discoverable in python.</p>
+<p>Each option should be a group of enums that are useful in many cases. For example <code>muted_sm</code> is very commonly used as a subheader below a card title and looks great. These should be high level things that users can generally just pick from to have a decent default without much thought.</p>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L87" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="textt" class="level3">
+<h3 class="anchored" data-anchor-id="textt">TextT</h3>
+<blockquote class="blockquote">
+<pre><code> TextT (value, names=None, module=None, qualname=None, type=None, start=1)</code></pre>
+</blockquote>
+<p><em>An enumeration.</em></p>
+<div id="cell-26" class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(TextT.muted_sm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>text-sm uk-text-muted</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="icons-and-avatars" class="level2">
+<h2 class="anchored" data-anchor-id="icons-and-avatars">Icons and Avatars</h2>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L98" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="ukicon" class="level3">
+<h3 class="anchored" data-anchor-id="ukicon">UkIcon</h3>
+<blockquote class="blockquote">
+<pre><code> UkIcon (icon, ratio=1, cls=())</code></pre>
+</blockquote>
+<p><em>Creates a Span with the given icon</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>icon</td>
+<td></td>
+<td></td>
+<td>Icon name from https://getuikit.com/docs/icon</td>
+</tr>
+<tr class="even">
+<td>ratio</td>
+<td>int</td>
+<td>1</td>
+<td>Icon ratio/size</td>
+</tr>
+<tr class="odd">
+<td>cls</td>
+<td>tuple</td>
+<td>()</td>
+<td>Span classes</td>
+</tr>
+</tbody>
+</table>
+<div id="cell-29" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>UkIcon(<span class="st">'heart'</span>, <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb18"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> uk-icon</span><span class="op">=</span><span class="st">"icon: heart; ratio: 0.5"</span><span class="dt">&gt;&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L106" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="dicebearavatar" class="level3">
+<h3 class="anchored" data-anchor-id="dicebearavatar">DiceBearAvatar</h3>
+<blockquote class="blockquote">
+<pre><code> DiceBearAvatar (seed_name, h, w)</code></pre>
+</blockquote>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>seed_name</td>
+<td>Seed name (ie ‘Isaac Flath’)</td>
+</tr>
+<tr class="even">
+<td>h</td>
+<td>Height</td>
+</tr>
+<tr class="odd">
+<td>w</td>
+<td>Width</td>
+</tr>
+</tbody>
+</table>
+<div id="cell-31" class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>DiceBearAvatar(<span class="st">'Isaac Flath'</span>, <span class="dv">10</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb21"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">"relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full bg-accent"</span><span class="dt">&gt;&lt;</span><span class="kw">img</span><span class="ot"> alt</span><span class="op">=</span><span class="st">"Avatar"</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://api.dicebear.com/8.x/lorelei/svg?seed=Isaac Flath"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"aspect-square h-full w-full"</span><span class="dt">&gt;&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="spacing-flexbox-grid" class="level2">
+<h2 class="anchored" data-anchor-id="spacing-flexbox-grid">Spacing | Flexbox | Grid</h2>
+<p>The most common pattern for spacing it to organize the general high level page layout with a <a href="https://Isaac-Flath.github.io/fh-frankenui/core.html#grid"><code>Grid</code></a>, and smaller components with <code>Flex</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Play <a href="https://flexboxfroggy.com/">Flex Box Froggy</a> to get an understanding of flex box.</p>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L115" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="flext" class="level3">
+<h3 class="anchored" data-anchor-id="flext">FlexT</h3>
+<blockquote class="blockquote">
+<pre><code> FlexT (value, names=None, module=None, qualname=None, type=None, start=1)</code></pre>
+</blockquote>
+<p><em>An enumeration.</em></p>
+<div id="cell-35" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FlexT(VEnum):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    block       <span class="op">=</span> <span class="st">''</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    inline      <span class="op">=</span> <span class="st">'inline'</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#horizontal</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    left        <span class="op">=</span> <span class="st">'left'</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    center      <span class="op">=</span> <span class="st">'center'</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    right       <span class="op">=</span> <span class="st">'right'</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    between     <span class="op">=</span> <span class="st">'between'</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    around      <span class="op">=</span> <span class="st">'around'</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#vertical</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    stretch     <span class="op">=</span> <span class="st">'stretch'</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    top         <span class="op">=</span> <span class="st">'top'</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    middle      <span class="op">=</span> <span class="st">'middle'</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    botton      <span class="op">=</span> <span class="st">'bottom'</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">#direction</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    row         <span class="op">=</span> <span class="st">'row'</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    row_reverse <span class="op">=</span> <span class="st">'row-reverse'</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    col         <span class="op">=</span> <span class="st">'col'</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    col_reverse <span class="op">=</span> <span class="st">'col-reverse'</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">#wrap</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    nowrap      <span class="op">=</span> <span class="st">'nowrap'</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    wrap        <span class="op">=</span> <span class="st">'wrap'</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    wrap_reverse<span class="op">=</span> <span class="st">'wrap-reverse'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-36" class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Div(cls<span class="op">=</span>(FlexT.block,FlexT.left,FlexT.middle,<span class="st">'some_cls'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb25"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-flex uk-flex-left uk-flex-middle some_cls"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L140" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="gridt" class="level3">
+<h3 class="anchored" data-anchor-id="gridt">GridT</h3>
+<blockquote class="blockquote">
+<pre><code> GridT (value, names=None, module=None, qualname=None, type=None, start=1)</code></pre>
+</blockquote>
+<p><em>An enumeration.</em></p>
+<div id="cell-38" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GridT(VEnum):</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># gap</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    small  <span class="op">=</span> <span class="st">'small'</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    medium <span class="op">=</span> <span class="st">'medium'</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    large  <span class="op">=</span> <span class="st">'large'</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    none   <span class="op">=</span> <span class="st">'collapse'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L148" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="grid" class="level3">
+<h3 class="anchored" data-anchor-id="grid">Grid</h3>
+<blockquote class="blockquote">
+<pre><code> Grid (*c, cols=3, cls=(), **kwargs)</code></pre>
+</blockquote>
+<p><em>Creates a grid with the given number of columns, often used for a grid of cards</em></p>
+<div id="cell-40" class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>Grid(<span class="op">*</span><span class="bu">map</span>(Div, <span class="bu">range</span>(<span class="dv">6</span>)),cols<span class="op">=</span><span class="dv">3</span>, cls<span class="op">=</span>GridT.small)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb30"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"grid grid-cols-3 uk-grid-small"</span><span class="dt">&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span>0<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span>1<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span>2<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span>3<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span>4<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span>5<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L158" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="responsivegrid" class="level3">
+<h3 class="anchored" data-anchor-id="responsivegrid">ResponsiveGrid</h3>
+<blockquote class="blockquote">
+<pre><code> ResponsiveGrid (*c, sm=1, md=2, lg=3, xl=4, gap=2, cls='', **kwargs)</code></pre>
+</blockquote>
+<p><em>Creates a responsive grid with the given number of columns for different screen sizes</em></p>
+<p>We can use the <a href="https://Isaac-Flath.github.io/fh-frankenui/core.html#flext"><code>FlexT</code></a> enum above to create <code>Div</code>s that arrange components in a flex box in different ways.</p>
+<p>For example, <a href="https://Isaac-Flath.github.io/fh-frankenui/core.html#fullyspaceddiv"><code>FullySpacedDiv</code></a> applies a very common pattern so we’ve made a function that helps to this for you. But if you look at the code, it’s really just using the enum to apply the right combonation of flex classes.</p>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L163" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="fullyspaceddiv" class="level3">
+<h3 class="anchored" data-anchor-id="fullyspaceddiv">FullySpacedDiv</h3>
+<blockquote class="blockquote">
+<pre><code> FullySpacedDiv (*c, cls='uk-width-1-1', **kwargs)</code></pre>
+</blockquote>
+<p><em>Creates a flex div with it’s components having as much space between them as possible</em></p>
+<div id="cell-44" class="cell">
+<details open="" class="code-fold">
+<summary>Exported source</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> FullySpacedDiv(<span class="op">*</span>c,                <span class="co"># Components</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                   cls<span class="op">=</span><span class="st">'uk-width-1-1'</span>,<span class="co"># Classes for outer div</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                   <span class="op">**</span>kwargs           <span class="co"># Additional args for outer div</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>                  ):                  <span class="co"># Div with spaced components via flex classes</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"Creates a flex div with it's components having as much space between them as possible"</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    cls <span class="op">=</span> stringify(cls)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Div(cls<span class="op">=</span>(FlexT.block,FlexT.between,FlexT.middle,cls), <span class="op">**</span>kwargs)(<span class="op">*</span>c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-45" class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>FullySpacedDiv(<span class="op">*</span><span class="bu">map</span>(P, <span class="bu">range</span>(<span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb35"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-flex uk-flex-between uk-flex-middle uk-width-1-1"</span><span class="dt">&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>0<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>1<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>2<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L172" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="centereddiv" class="level3">
+<h3 class="anchored" data-anchor-id="centereddiv">CenteredDiv</h3>
+<blockquote class="blockquote">
+<pre><code> CenteredDiv (*c, cls=(), **kwargs)</code></pre>
+</blockquote>
+<p><em>Creates a flex div with it’s components centered in it</em></p>
+<div id="cell-47" class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>CenteredDiv(<span class="op">*</span><span class="bu">map</span>(P, <span class="bu">range</span>(<span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb38"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-flex uk-flex-col uk-flex-middle uk-flex-center "</span><span class="dt">&gt;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>0<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>1<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>2<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L181" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="laligneddiv" class="level3">
+<h3 class="anchored" data-anchor-id="laligneddiv">LAlignedDiv</h3>
+<blockquote class="blockquote">
+<pre><code> LAlignedDiv (*c, cls=(), **kwargs)</code></pre>
+</blockquote>
+<p><em>Creates a flex div with it’s components aligned to the left</em></p>
+<div id="cell-49" class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>LAlignedDiv(<span class="op">*</span><span class="bu">map</span>(P, <span class="bu">range</span>(<span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb41"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-flex uk-flex-left uk-flex-middle "</span><span class="dt">&gt;</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>0<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>1<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>2<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L190" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="raligneddiv" class="level3">
+<h3 class="anchored" data-anchor-id="raligneddiv">RAlignedDiv</h3>
+<blockquote class="blockquote">
+<pre><code> RAlignedDiv (*c, cls=(), **kwargs)</code></pre>
+</blockquote>
+<p><em>Creates a flex div with it’s components aligned to the right</em></p>
+<div id="cell-51" class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>RAlignedDiv(<span class="op">*</span><span class="bu">map</span>(P, <span class="bu">range</span>(<span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb44"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-flex uk-flex-right uk-flex-middle "</span><span class="dt">&gt;</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>0<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>1<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>2<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L199" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="vstackeddiv" class="level3">
+<h3 class="anchored" data-anchor-id="vstackeddiv">VStackedDiv</h3>
+<blockquote class="blockquote">
+<pre><code> VStackedDiv (*c, cls='', **kwargs)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L204" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="hstackeddiv" class="level3">
+<h3 class="anchored" data-anchor-id="hstackeddiv">HStackedDiv</h3>
+<blockquote class="blockquote">
+<pre><code> HStackedDiv (*c, cls='', **kwargs)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L209" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="spacebetweendiv" class="level3">
+<h3 class="anchored" data-anchor-id="spacebetweendiv">SpaceBetweenDiv</h3>
+<blockquote class="blockquote">
+<pre><code> SpaceBetweenDiv (*c, cls='', **kwargs)</code></pre>
+</blockquote>
+</section>
+</section>
+<section id="basic-inputs" class="level2">
+<h2 class="anchored" data-anchor-id="basic-inputs">Basic Inputs</h2>
+<p>Inputs of various types often go with a label. Because of this we created functions to do this for you along with properly linking the <code>for</code> attribute from the lable to the input. We also have some nice defaults, such as putting a little spacing between the label and the input</p>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L214" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="ukgenericinput" class="level3">
+<h3 class="anchored" data-anchor-id="ukgenericinput">UkGenericInput</h3>
+<blockquote class="blockquote">
+<pre><code> UkGenericInput (input_fn:fastcore.xml.FT, label:str|fastcore.xml.FT=(),
+                 lbl_cls:str|enum.Enum=(), inp_cls:str|enum.Enum='',
+                 cls:str|enum.Enum=('space-y-2',), id:str='', **kwargs)</code></pre>
+</blockquote>
+<p><em><code>Div(Label,Input)</code> component with Uk styling injected appropriately. Generally you should higher level API, such as <code>UKTextArea</code> which is created for you in this library</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>input_fn</td>
+<td>FT</td>
+<td></td>
+<td>FT Components that generates a user input (e.g.&nbsp;<code>TextArea</code>)</td>
+</tr>
+<tr class="even">
+<td>label</td>
+<td>str | fastcore.xml.FT</td>
+<td>()</td>
+<td>String or FT component that goes in <code>Label</code></td>
+</tr>
+<tr class="odd">
+<td>lbl_cls</td>
+<td>str | enum.Enum</td>
+<td>()</td>
+<td>Additional classes that goes in <code>Label</code></td>
+</tr>
+<tr class="even">
+<td>inp_cls</td>
+<td>str | enum.Enum</td>
+<td></td>
+<td>Additional classes that go in user input (e.g.&nbsp;<code>TextArea</code>)</td>
+</tr>
+<tr class="odd">
+<td>cls</td>
+<td>str | enum.Enum</td>
+<td>(‘space-y-2’,)</td>
+<td>Div cls</td>
+</tr>
+<tr class="even">
+<td>id</td>
+<td>str</td>
+<td></td>
+<td>ID of the user input (e.g.&nbsp;<code>TextArea</code>)</td>
+</tr>
+<tr class="odd">
+<td>kwargs</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>FT</strong></td>
+<td></td>
+<td><strong>FT component in structure <code>(Div(label,input))</code></strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L230" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukinput" class="level3">
+<h3 class="anchored" data-anchor-id="ukinput">UkInput</h3>
+<blockquote class="blockquote">
+<pre><code> UkInput (*args, inp_cls='', label:str|fastcore.xml.FT=(),
+          lbl_cls:str|enum.Enum=(), cls:str|enum.Enum=('space-y-2',),
+          id:str='')</code></pre>
+</blockquote>
+<p><em>Creates a text input with uk styling</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>args</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>inp_cls</td>
+<td>str | enum.Enum</td>
+<td></td>
+<td>Additional classes that go in user input (e.g.&nbsp;<code>TextArea</code>)</td>
+</tr>
+<tr class="odd">
+<td>label</td>
+<td>str | fastcore.xml.FT</td>
+<td>()</td>
+<td>String or FT component that goes in <code>Label</code></td>
+</tr>
+<tr class="even">
+<td>lbl_cls</td>
+<td>str | enum.Enum</td>
+<td>()</td>
+<td>Additional classes that goes in <code>Label</code></td>
+</tr>
+<tr class="odd">
+<td>cls</td>
+<td>str | enum.Enum</td>
+<td>(‘space-y-2’,)</td>
+<td>Div cls</td>
+</tr>
+<tr class="even">
+<td>id</td>
+<td>str</td>
+<td></td>
+<td>ID of the user input (e.g.&nbsp;<code>TextArea</code>)</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>FT</strong></td>
+<td></td>
+<td><strong>FT component in structure <code>(Div(label,input))</code></strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-59" class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>UkInput(<span class="st">'myLabel'</span>, <span class="bu">id</span><span class="op">=</span><span class="st">'my_id'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb51"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"space-y-2"</span><span class="dt">&gt;</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"my_id"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-form-label "</span><span class="dt">&gt;</span>myLabel<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span>  <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-input "</span><span class="dt">&gt;</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L237" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukswitch" class="level3">
+<h3 class="anchored" data-anchor-id="ukswitch">UkSwitch</h3>
+<blockquote class="blockquote">
+<pre><code> UkSwitch (*args, inp_cls='', label:str|fastcore.xml.FT=(),
+           lbl_cls:str|enum.Enum=(), cls:str|enum.Enum=('space-y-2',),
+           id:str='')</code></pre>
+</blockquote>
+<p><em>Creates a switch input with uk styling</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>args</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>inp_cls</td>
+<td>str | enum.Enum</td>
+<td></td>
+<td>Additional classes that go in user input (e.g.&nbsp;<code>TextArea</code>)</td>
+</tr>
+<tr class="odd">
+<td>label</td>
+<td>str | fastcore.xml.FT</td>
+<td>()</td>
+<td>String or FT component that goes in <code>Label</code></td>
+</tr>
+<tr class="even">
+<td>lbl_cls</td>
+<td>str | enum.Enum</td>
+<td>()</td>
+<td>Additional classes that goes in <code>Label</code></td>
+</tr>
+<tr class="odd">
+<td>cls</td>
+<td>str | enum.Enum</td>
+<td>(‘space-y-2’,)</td>
+<td>Div cls</td>
+</tr>
+<tr class="even">
+<td>id</td>
+<td>str</td>
+<td></td>
+<td>ID of the user input (e.g.&nbsp;<code>TextArea</code>)</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>FT</strong></td>
+<td></td>
+<td><strong>FT component in structure <code>(Div(label,input))</code></strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-61" class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>UkSwitch(cls<span class="op">=</span><span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb54"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"hidden"</span><span class="ot"> skip</span><span class="dt">&gt;</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"checkbox"</span><span class="ot"> value</span><span class="op">=</span><span class="st">"1"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-toggle-switch uk-form-switch "</span><span class="dt">&gt;</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L244" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukcheckbox" class="level3">
+<h3 class="anchored" data-anchor-id="ukcheckbox">UkCheckbox</h3>
+<blockquote class="blockquote">
+<pre><code> UkCheckbox (*args, inp_cls='', label:str|fastcore.xml.FT=(),
+             lbl_cls:str|enum.Enum=(), cls:str|enum.Enum=('space-y-2',),
+             id:str='')</code></pre>
+</blockquote>
+<p><em>Creates a checkbox input with uk styling</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>args</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>inp_cls</td>
+<td>str | enum.Enum</td>
+<td></td>
+<td>Additional classes that go in user input (e.g.&nbsp;<code>TextArea</code>)</td>
+</tr>
+<tr class="odd">
+<td>label</td>
+<td>str | fastcore.xml.FT</td>
+<td>()</td>
+<td>String or FT component that goes in <code>Label</code></td>
+</tr>
+<tr class="even">
+<td>lbl_cls</td>
+<td>str | enum.Enum</td>
+<td>()</td>
+<td>Additional classes that goes in <code>Label</code></td>
+</tr>
+<tr class="odd">
+<td>cls</td>
+<td>str | enum.Enum</td>
+<td>(‘space-y-2’,)</td>
+<td>Div cls</td>
+</tr>
+<tr class="even">
+<td>id</td>
+<td>str</td>
+<td></td>
+<td>ID of the user input (e.g.&nbsp;<code>TextArea</code>)</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>FT</strong></td>
+<td></td>
+<td><strong>FT component in structure <code>(Div(label,input))</code></strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-63" class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>UkCheckbox(<span class="st">'myLabel'</span>, inp_cls<span class="op">=</span><span class="st">'another_class'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb57"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"space-y-2"</span><span class="dt">&gt;</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-form-label "</span><span class="dt">&gt;</span>myLabel<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span>  <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"hidden"</span><span class="ot"> skip</span><span class="dt">&gt;</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"checkbox"</span><span class="ot"> value</span><span class="op">=</span><span class="st">"1"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-checkbox another_class"</span><span class="dt">&gt;</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L251" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="uktextarea" class="level3">
+<h3 class="anchored" data-anchor-id="uktextarea">UkTextArea</h3>
+<blockquote class="blockquote">
+<pre><code> UkTextArea (*args, inp_cls='', label:str|fastcore.xml.FT=(),
+             lbl_cls:str|enum.Enum=(), cls:str|enum.Enum=('space-y-2',),
+             id:str='')</code></pre>
+</blockquote>
+<p><em>Creates a textarea with uk styling</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>args</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>inp_cls</td>
+<td>str | enum.Enum</td>
+<td></td>
+<td>Additional classes that go in user input (e.g.&nbsp;<code>TextArea</code>)</td>
+</tr>
+<tr class="odd">
+<td>label</td>
+<td>str | fastcore.xml.FT</td>
+<td>()</td>
+<td>String or FT component that goes in <code>Label</code></td>
+</tr>
+<tr class="even">
+<td>lbl_cls</td>
+<td>str | enum.Enum</td>
+<td>()</td>
+<td>Additional classes that goes in <code>Label</code></td>
+</tr>
+<tr class="odd">
+<td>cls</td>
+<td>str | enum.Enum</td>
+<td>(‘space-y-2’,)</td>
+<td>Div cls</td>
+</tr>
+<tr class="even">
+<td>id</td>
+<td>str</td>
+<td></td>
+<td>ID of the user input (e.g.&nbsp;<code>TextArea</code>)</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>FT</strong></td>
+<td></td>
+<td><strong>FT component in structure <code>(Div(label,input))</code></strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-65" class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>UkTextArea(<span class="st">'myLabel'</span>, lbl_cls<span class="op">=</span><span class="st">'another_class'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb60"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"space-y-2"</span><span class="dt">&gt;</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-form-label another_class"</span><span class="dt">&gt;</span>myLabel<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;&lt;</span><span class="kw">textarea</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-textarea "</span><span class="dt">&gt;&lt;/</span><span class="kw">textarea</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L258" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukformlabel" class="level3">
+<h3 class="anchored" data-anchor-id="ukformlabel">UkFormLabel</h3>
+<blockquote class="blockquote">
+<pre><code> UkFormLabel (*args, inp_cls='', label:str|fastcore.xml.FT=(),
+              lbl_cls:str|enum.Enum=(), cls:str|enum.Enum=('space-y-2',),
+              id:str='')</code></pre>
+</blockquote>
+<p><em>Creates a form label with uk styling</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>args</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>inp_cls</td>
+<td>str | enum.Enum</td>
+<td></td>
+<td>Additional classes that go in user input (e.g.&nbsp;<code>TextArea</code>)</td>
+</tr>
+<tr class="odd">
+<td>label</td>
+<td>str | fastcore.xml.FT</td>
+<td>()</td>
+<td>String or FT component that goes in <code>Label</code></td>
+</tr>
+<tr class="even">
+<td>lbl_cls</td>
+<td>str | enum.Enum</td>
+<td>()</td>
+<td>Additional classes that goes in <code>Label</code></td>
+</tr>
+<tr class="odd">
+<td>cls</td>
+<td>str | enum.Enum</td>
+<td>(‘space-y-2’,)</td>
+<td>Div cls</td>
+</tr>
+<tr class="even">
+<td>id</td>
+<td>str</td>
+<td></td>
+<td>ID of the user input (e.g.&nbsp;<code>TextArea</code>)</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>FT</strong></td>
+<td></td>
+<td><strong>FT component in structure <code>(Div(label,input))</code></strong></td>
+</tr>
+</tbody>
+</table>
+<div id="cell-67" class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>UkFormLabel(<span class="st">'myLabel'</span>, lbl_cls<span class="op">=</span>TextT.muted_sm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb63"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"space-y-2"</span><span class="dt">&gt;</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-form-label text-sm uk-text-muted"</span><span class="dt">&gt;</span>myLabel<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;&lt;</span><span class="kw">uk-input-tag</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-form-label "</span><span class="dt">&gt;&lt;/</span><span class="kw">uk-input-tag</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="buttons" class="level2">
+<h2 class="anchored" data-anchor-id="buttons">Buttons</h2>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L264" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="ukbuttont" class="level3">
+<h3 class="anchored" data-anchor-id="ukbuttont">UkButtonT</h3>
+<blockquote class="blockquote">
+<pre><code> UkButtonT (value, names=None, module=None, qualname=None, type=None,
+            start=1)</code></pre>
+</blockquote>
+<p><em>An enumeration.</em></p>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L274" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukbutton" class="level3">
+<h3 class="anchored" data-anchor-id="ukbutton">UkButton</h3>
+<blockquote class="blockquote">
+<pre><code> UkButton (*c, cls=&lt;UkButtonT.default: 'default'&gt;, **kwargs)</code></pre>
+</blockquote>
+<p><em>Creates a button with uk styling</em></p>
+<div id="cell-71" class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>UkButton(<span class="st">'MyButton'</span>, cls<span class="op">=</span>UkButtonT.primary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb67"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">"button"</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-button uk-button-primary"</span><span class="dt">&gt;</span>MyButton<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L283" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukiconbutton" class="level3">
+<h3 class="anchored" data-anchor-id="ukiconbutton">UkIconButton</h3>
+<blockquote class="blockquote">
+<pre><code> UkIconButton (*c, sz='small', cls=(), **kwargs)</code></pre>
+</blockquote>
+<p><em>Creates an <code>IconButton</code> with uk styling</em></p>
+<div id="cell-73" class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>UkIconButton(UkIcon(<span class="st">'home'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb70"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-icon-button uk-icon-button-small "</span><span class="dt">&gt;&lt;</span><span class="kw">span</span><span class="ot"> uk-icon</span><span class="op">=</span><span class="st">"icon: home; ratio: 1"</span><span class="dt">&gt;&lt;/</span><span class="kw">span</span><span class="dt">&gt;&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="drop-downs" class="level2">
+<h2 class="anchored" data-anchor-id="drop-downs">Drop Downs</h2>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L289" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="options" class="level3">
+<h3 class="anchored" data-anchor-id="options">Options</h3>
+<blockquote class="blockquote">
+<pre><code> Options (*c, selected_idx:int=None, disabled_idxs:set=None)</code></pre>
+</blockquote>
+<p><em>Helper function to wrap things into <code>Option</code>s for use in <code>UKSelect</code></em></p>
+<div id="cell-76" class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(<span class="bu">map</span>(to_xml,Options(<span class="st">'option1'</span>,<span class="st">'option2'</span>,<span class="st">'option3'</span>, selected_idx<span class="op">=</span><span class="dv">1</span>, disabled_idxs<span class="op">=</span>{<span class="dv">0</span>,<span class="dv">2</span>})))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>['&lt;option disabled&gt;option1&lt;/option&gt;',
+ '&lt;option selected&gt;option2&lt;/option&gt;',
+ '&lt;option disabled&gt;option3&lt;/option&gt;']</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L297" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukselect" class="level3">
+<h3 class="anchored" data-anchor-id="ukselect">UkSelect</h3>
+<blockquote class="blockquote">
+<pre><code> UkSelect (*option, label=(), lbl_cls=(), inp_cls=(), cls=('space-y-2',),
+           id='', name='', placeholder='', searchable=False, **kwargs)</code></pre>
+</blockquote>
+<p><em>Creates a select dropdown with uk styling</em></p>
+<div id="cell-78" class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>UkSelect(<span class="op">*</span>Options(<span class="st">'a'</span>, <span class="st">'b'</span>), label<span class="op">=</span><span class="st">'MyLabel'</span>, placeholder<span class="op">=</span><span class="st">'MyPlaceholder'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb76"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"space-y-2"</span><span class="dt">&gt;</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-form-label "</span><span class="dt">&gt;</span>MyLabel<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;&lt;</span><span class="kw">uk-select</span><span class="ot"> uk-cloak placeholder</span><span class="op">=</span><span class="st">"MyPlaceholder"</span><span class="dt">&gt;&lt;</span><span class="kw">option</span><span class="dt">&gt;</span>a<span class="dt">&lt;/</span><span class="kw">option</span><span class="dt">&gt;&lt;</span><span class="kw">option</span><span class="dt">&gt;</span>b<span class="dt">&lt;/</span><span class="kw">option</span><span class="dt">&gt;&lt;/</span><span class="kw">uk-select</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L325" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukdropdownbutton" class="level3">
+<h3 class="anchored" data-anchor-id="ukdropdownbutton">UkDropdownButton</h3>
+<blockquote class="blockquote">
+<pre><code> UkDropdownButton (*opt_grp, opt_hdrs=None, label=None,
+                   btn_cls=&lt;UkButtonT.default: 'default'&gt;, cls=(),
+                   dd_cls=(), icon='triangle-down', icon_cls='',
+                   icon_position='right')</code></pre>
+</blockquote>
+<div id="cell-80" class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># UkDropdownButton((A('Option 1.1', _href='#'), A('Option 1.2', _href='#')), </span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                  (A('Option 2.1', _href='#'), A('Option 2.2', _href='#')),</span></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                  opt_hdrs=('Header 1', 'Header 2'))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="headings" class="level2">
+<h2 class="anchored" data-anchor-id="headings">Headings</h2>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L346" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="ukgenericcomponent" class="level3">
+<h3 class="anchored" data-anchor-id="ukgenericcomponent">UkGenericComponent</h3>
+<blockquote class="blockquote">
+<pre><code> UkGenericComponent (component_fn, *c, cls=(), **kwargs)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L356" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukh6" class="level3">
+<h3 class="anchored" data-anchor-id="ukh6">UkH6</h3>
+<blockquote class="blockquote">
+<pre><code> UkH6 (*c, cls=(), **kwargs)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L355" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukh5" class="level3">
+<h3 class="anchored" data-anchor-id="ukh5">UkH5</h3>
+<blockquote class="blockquote">
+<pre><code> UkH5 (*c, cls=(), **kwargs)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L354" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukh4" class="level3">
+<h3 class="anchored" data-anchor-id="ukh4">UkH4</h3>
+<blockquote class="blockquote">
+<pre><code> UkH4 (*c, cls=(), **kwargs)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L353" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukh3" class="level3">
+<h3 class="anchored" data-anchor-id="ukh3">UkH3</h3>
+<blockquote class="blockquote">
+<pre><code> UkH3 (*c, cls=(), **kwargs)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L352" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukh2" class="level3">
+<h3 class="anchored" data-anchor-id="ukh2">UkH2</h3>
+<blockquote class="blockquote">
+<pre><code> UkH2 (*c, cls=(), **kwargs)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L351" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukh1" class="level3">
+<h3 class="anchored" data-anchor-id="ukh1">UkH1</h3>
+<blockquote class="blockquote">
+<pre><code> UkH1 (*c, cls=(), **kwargs)</code></pre>
+</blockquote>
+<div id="cell-89" class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>UkH1(<span class="st">'My Uk styled header'</span>,cls<span class="op">=</span><span class="st">'another-class'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb87"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-h1 another-class"</span><span class="dt">&gt;</span>My Uk styled header<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="dividers" class="level2">
+<h2 class="anchored" data-anchor-id="dividers">Dividers</h2>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L359" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="ukhsplit" class="level3">
+<h3 class="anchored" data-anchor-id="ukhsplit">UkHSplit</h3>
+<blockquote class="blockquote">
+<pre><code> UkHSplit (*c, cls=(), line_cls=(), text_cls=())</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L366" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukhline" class="level3">
+<h3 class="anchored" data-anchor-id="ukhline">UkHLine</h3>
+<blockquote class="blockquote">
+<pre><code> UkHLine (lwidth=2, y_space=4)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L369" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="uknavdivider" class="level3">
+<h3 class="anchored" data-anchor-id="uknavdivider">UkNavDivider</h3>
+<blockquote class="blockquote">
+<pre><code> UkNavDivider ()</code></pre>
+</blockquote>
+</section>
+</section>
+<section id="navbar" class="level2">
+<h2 class="anchored" data-anchor-id="navbar">NavBar</h2>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L372" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="uknavbardropdown" class="level3">
+<h3 class="anchored" data-anchor-id="uknavbardropdown">UkNavbarDropdown</h3>
+<blockquote class="blockquote">
+<pre><code> UkNavbarDropdown (*c, label, href='#', cls='', has_header=False,
+                   **kwargs)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L392" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="uknavbar" class="level3">
+<h3 class="anchored" data-anchor-id="uknavbar">UkNavbar</h3>
+<blockquote class="blockquote">
+<pre><code> UkNavbar (lnav:Sequence[Union[str,fastcore.xml.FT]]=None,
+           rnav:Sequence[Union[str,fastcore.xml.FT]]=None, cls='',
+           **kwargs)</code></pre>
+</blockquote>
+</section>
+</section>
+<section id="sidebar" class="level2">
+<h2 class="anchored" data-anchor-id="sidebar">Sidebar</h2>
+<div id="cell-98" class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>sidebar_items <span class="op">=</span> [<span class="st">"Profile"</span>, <span class="st">"Account"</span>, <span class="st">"Appearance"</span>, <span class="st">"Notifications"</span>, <span class="st">"Display"</span>]</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>tst <span class="op">=</span> Ul(cls<span class="op">=</span><span class="st">'uk-nav-primary'</span>, uk_switcher<span class="op">=</span><span class="st">"connect: #component-nav; animation: uk-animation-fade"</span>)(</span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>                            <span class="op">*</span><span class="bu">map</span>(<span class="kw">lambda</span> x: Li(A(x)),sidebar_items))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L402" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="uksidebar" class="level3">
+<h3 class="anchored" data-anchor-id="uksidebar">UkSidebar</h3>
+<blockquote class="blockquote">
+<pre><code> UkSidebar (*ul, cls='space-y-4 p-4', **kwargs)</code></pre>
+</blockquote>
+<p><em>Creates a styled sidebar component</em></p>
+<div id="cell-100" class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>sidebar_items <span class="op">=</span> [<span class="st">"Profile"</span>, <span class="st">"Account"</span>]</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>tst <span class="op">=</span> Ul(cls<span class="op">=</span><span class="st">'uk-nav-primary'</span>)(<span class="op">*</span><span class="bu">map</span>(<span class="kw">lambda</span> x: Li(A(x)),sidebar_items))</span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>UkSidebar(tst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb96"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"space-y-4 p-4"</span><span class="dt">&gt;</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">ul</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-nav-primary uk-nav "</span><span class="dt">&gt;</span></span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#"</span><span class="dt">&gt;</span>Profile<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>    <span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#"</span><span class="dt">&gt;</span>Account<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>    <span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
+<span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="navtab" class="level2">
+<h2 class="anchored" data-anchor-id="navtab">Navtab</h2>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L422" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="uktab" class="level3">
+<h3 class="anchored" data-anchor-id="uktab">UkTab</h3>
+<blockquote class="blockquote">
+<pre><code> UkTab (*items, maxw=96, cls='', **kwargs)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L419" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="navtab-1" class="level3">
+<h3 class="anchored" data-anchor-id="navtab-1">NavTab</h3>
+<blockquote class="blockquote">
+<pre><code> NavTab (text, active=False)</code></pre>
+</blockquote>
+</section>
+</section>
+<section id="cards" class="level2">
+<h2 class="anchored" data-anchor-id="cards">Cards</h2>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L427" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="card" class="level3">
+<h3 class="anchored" data-anchor-id="card">Card</h3>
+<blockquote class="blockquote">
+<pre><code> Card (*c, header=None, footer=None, body_cls='space-y-6', header_cls=(),
+       footer_cls=(), cls=(), **kwargs)</code></pre>
+</blockquote>
+</section>
+</section>
+<section id="modals" class="level2">
+<h2 class="anchored" data-anchor-id="modals">Modals</h2>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L446" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="modal" class="level3">
+<h3 class="anchored" data-anchor-id="modal">Modal</h3>
+<blockquote class="blockquote">
+<pre><code> Modal (*c, header=None, footer=None, body_cls='space-y-6',
+        header_cls='p-6', footer_cls=(), cls=(), **kwargs)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L444" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="ukmodaltitle" class="level3">
+<h3 class="anchored" data-anchor-id="ukmodaltitle">UkModalTitle</h3>
+<blockquote class="blockquote">
+<pre><code> UkModalTitle (*c, cls=())</code></pre>
+</blockquote>
+</section>
+</section>
+<section id="tables" class="level2">
+<h2 class="anchored" data-anchor-id="tables">Tables</h2>
+<div id="cell-110" class="cell">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_header(col):</span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>    cls <span class="op">=</span> <span class="st">'p-2 '</span> <span class="op">+</span> <span class="st">'uk-table-shrink'</span> <span class="cf">if</span> col <span class="kw">in</span> (<span class="st">'Done'</span>,<span class="st">'Actions'</span>) <span class="cf">else</span> <span class="st">''</span></span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Th(col, cls<span class="op">=</span>cls)</span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> render_cell(col, row):</span>
+<span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">match</span> col:</span>
+<span id="cb102-7"><a href="#cb102-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="st">"ColA"</span>:  <span class="cf">return</span> Td(row[col], cls<span class="op">=</span>TextT.muted_sm)</span>
+<span id="cb102-8"><a href="#cb102-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="st">"ColB"</span>:  <span class="cf">return</span> Td(row[col], cls<span class="op">=</span>TextT.medium_sm)</span>
+<span id="cb102-9"><a href="#cb102-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="st">'ColC'</span>:  <span class="cf">return</span> Td(row[col])</span>
+<span id="cb102-10"><a href="#cb102-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="st">'ColD'</span>:  <span class="cf">return</span> Td(row[col], cls<span class="op">=</span><span class="st">'p-2'</span>)</span>
+<span id="cb102-11"><a href="#cb102-11" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb102-12"><a href="#cb102-12" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> (<span class="st">'ColA'</span>, <span class="st">'ColB'</span>, <span class="st">'ColC'</span>, <span class="st">'ColD'</span>)</span>
+<span id="cb102-13"><a href="#cb102-13" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [{<span class="st">'ColA'</span>:<span class="dv">1</span>, <span class="st">'ColB'</span>:<span class="dv">2</span>, <span class="st">'ColC'</span>:<span class="dv">3</span>, <span class="st">'ColD'</span>:<span class="dv">4</span>},]</span>
+<span id="cb102-14"><a href="#cb102-14" aria-hidden="true" tabindex="-1"></a><span class="co"># UkTable(cols, data, cell_render=render_cell, header_render=render_header)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L467" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="tableheader" class="level3">
+<h3 class="anchored" data-anchor-id="tableheader">TableHeader</h3>
+<blockquote class="blockquote">
+<pre><code> TableHeader (columns, header_render=None)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L472" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="tablerow" class="level3">
+<h3 class="anchored" data-anchor-id="tablerow">TableRow</h3>
+<blockquote class="blockquote">
+<pre><code> TableRow (row, columns, cell_render=None)</code></pre>
+</blockquote>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L477" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="uktable" class="level3">
+<h3 class="anchored" data-anchor-id="uktable">UkTable</h3>
+<blockquote class="blockquote">
+<pre><code> UkTable (columns, data, *args, cls=(), footer=None, cell_render=None,
+          header_render=None, **kwargs)</code></pre>
+</blockquote>
+<div id="cell-114" class="cell">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>UkTable(cols,data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb107"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">table</span><span class="ot"> class</span><span class="op">=</span><span class="st">"uk-table uk-table-middle uk-table-divider uk-table-hover uk-table-small "</span><span class="dt">&gt;</span></span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">thead</span><span class="dt">&gt;</span></span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">th</span><span class="dt">&gt;</span></span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">th</span><span class="ot"> class</span><span class="op">=</span><span class="st">"p-2"</span><span class="dt">&gt;</span>ColA<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;</span></span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">th</span><span class="ot"> class</span><span class="op">=</span><span class="st">"p-2"</span><span class="dt">&gt;</span>ColB<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;</span></span>
+<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">th</span><span class="ot"> class</span><span class="op">=</span><span class="st">"p-2"</span><span class="dt">&gt;</span>ColC<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;</span></span>
+<span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">th</span><span class="ot"> class</span><span class="op">=</span><span class="st">"p-2"</span><span class="dt">&gt;</span>ColD<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;</span></span>
+<span id="cb107-8"><a href="#cb107-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;</span></span>
+<span id="cb107-9"><a href="#cb107-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">thead</span><span class="dt">&gt;</span></span>
+<span id="cb107-10"><a href="#cb107-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">tbody</span><span class="dt">&gt;</span></span>
+<span id="cb107-11"><a href="#cb107-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb107-12"><a href="#cb107-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">td</span><span class="ot"> class</span><span class="op">=</span><span class="st">"p-2"</span><span class="dt">&gt;</span>1<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb107-13"><a href="#cb107-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">td</span><span class="ot"> class</span><span class="op">=</span><span class="st">"p-2"</span><span class="dt">&gt;</span>2<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb107-14"><a href="#cb107-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">td</span><span class="ot"> class</span><span class="op">=</span><span class="st">"p-2"</span><span class="dt">&gt;</span>3<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb107-15"><a href="#cb107-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">td</span><span class="ot"> class</span><span class="op">=</span><span class="st">"p-2"</span><span class="dt">&gt;</span>4<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb107-16"><a href="#cb107-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb107-17"><a href="#cb107-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">tbody</span><span class="dt">&gt;</span></span>
+<span id="cb107-18"><a href="#cb107-18" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">table</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>How do I fix that error?</p>
+<div id="cell-116" class="cell">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's inspect the data structure to understand why we're getting this error</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Columns:"</span>, cols)</span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Data:"</span>)</span>
+<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> data:</span>
+<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(item)</span>
+<span id="cb108-6"><a href="#cb108-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-7"><a href="#cb108-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's also check the type of each item in data</span></span>
+<span id="cb108-8"><a href="#cb108-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Types in data:"</span>)</span>
+<span id="cb108-9"><a href="#cb108-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> data:</span>
+<span id="cb108-10"><a href="#cb108-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">type</span>(item))</span>
+<span id="cb108-11"><a href="#cb108-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-12"><a href="#cb108-12" aria-hidden="true" tabindex="-1"></a><span class="co"># If data contains dictionaries as expected, let's try to access a key</span></span>
+<span id="cb108-13"><a href="#cb108-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> data <span class="kw">and</span> <span class="bu">isinstance</span>(data[<span class="dv">0</span>], <span class="bu">dict</span>):</span>
+<span id="cb108-14"><a href="#cb108-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">First item keys:"</span>, <span class="bu">list</span>(data[<span class="dv">0</span>].keys()))</span>
+<span id="cb108-15"><a href="#cb108-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"First item values:"</span>, <span class="bu">list</span>(data[<span class="dv">0</span>].values()))</span>
+<span id="cb108-16"><a href="#cb108-16" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb108-17"><a href="#cb108-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Data is not in the expected format (list of dictionaries)"</span>)</span>
+<span id="cb108-18"><a href="#cb108-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-19"><a href="#cb108-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's modify the UkTable function to handle both dictionary and non-dictionary data</span></span>
+<span id="cb108-20"><a href="#cb108-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> UkTable(columns, data, <span class="op">*</span>args, cls<span class="op">=</span>(), footer<span class="op">=</span><span class="va">None</span>, cell_render<span class="op">=</span><span class="va">None</span>, header_render<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs):</span>
+<span id="cb108-21"><a href="#cb108-21" aria-hidden="true" tabindex="-1"></a>    table_cls <span class="op">=</span> <span class="st">'uk-table uk-table-middle uk-table-divider uk-table-hover uk-table-small '</span> <span class="op">+</span> stringify(cls)</span>
+<span id="cb108-22"><a href="#cb108-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb108-23"><a href="#cb108-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> data <span class="kw">and</span> <span class="bu">isinstance</span>(data[<span class="dv">0</span>], <span class="bu">dict</span>):</span>
+<span id="cb108-24"><a href="#cb108-24" aria-hidden="true" tabindex="-1"></a>        cell_render <span class="op">=</span> ifnone(cell_render, <span class="kw">lambda</span> c, r: Td(cls<span class="op">=</span><span class="st">'p-2'</span>)(r[c]))</span>
+<span id="cb108-25"><a href="#cb108-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb108-26"><a href="#cb108-26" aria-hidden="true" tabindex="-1"></a>        cell_render <span class="op">=</span> ifnone(cell_render, <span class="kw">lambda</span> c, r: Td(cls<span class="op">=</span><span class="st">'p-2'</span>)(r))</span>
+<span id="cb108-27"><a href="#cb108-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb108-28"><a href="#cb108-28" aria-hidden="true" tabindex="-1"></a>    header_render <span class="op">=</span> ifnone(header_render, <span class="kw">lambda</span> c: Th(cls<span class="op">=</span><span class="st">'p-2'</span>)(c))</span>
+<span id="cb108-29"><a href="#cb108-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb108-30"><a href="#cb108-30" aria-hidden="true" tabindex="-1"></a>    head <span class="op">=</span> Thead(Tr(<span class="op">*</span><span class="bu">map</span>(header_render, columns)))</span>
+<span id="cb108-31"><a href="#cb108-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb108-32"><a href="#cb108-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> data <span class="kw">and</span> <span class="bu">isinstance</span>(data[<span class="dv">0</span>], <span class="bu">dict</span>):</span>
+<span id="cb108-33"><a href="#cb108-33" aria-hidden="true" tabindex="-1"></a>        body <span class="op">=</span> Tbody(<span class="op">*</span>[Tr(<span class="op">*</span><span class="bu">map</span>(<span class="kw">lambda</span> c: cell_render(c, row), columns)) <span class="cf">for</span> row <span class="kw">in</span> data])</span>
+<span id="cb108-34"><a href="#cb108-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb108-35"><a href="#cb108-35" aria-hidden="true" tabindex="-1"></a>        body <span class="op">=</span> Tbody(<span class="op">*</span>[Tr(<span class="op">*</span><span class="bu">map</span>(<span class="kw">lambda</span> val: cell_render(<span class="va">None</span>, val), row)) <span class="cf">for</span> row <span class="kw">in</span> data])</span>
+<span id="cb108-36"><a href="#cb108-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb108-37"><a href="#cb108-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> footer:</span>
+<span id="cb108-38"><a href="#cb108-38" aria-hidden="true" tabindex="-1"></a>        table_content.append(Tfoot(footer))</span>
+<span id="cb108-39"><a href="#cb108-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb108-40"><a href="#cb108-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Table(cls<span class="op">=</span>table_cls, <span class="op">*</span>args, <span class="op">**</span>kwargs)(head, body)</span>
+<span id="cb108-41"><a href="#cb108-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-42"><a href="#cb108-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Try the modified UkTable function</span></span>
+<span id="cb108-43"><a href="#cb108-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Modified UkTable output:"</span>)</span>
+<span id="cb108-44"><a href="#cb108-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(UkTable(cols, data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="forms" class="level2">
+<h2 class="anchored" data-anchor-id="forms">Forms</h2>
+<hr>
+<p><a href="https://github.com/Isaac-Flath/fh-frankenui/blob/main/fh_frankenui/core.py#L494" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="ukformsection" class="level3">
+<h3 class="anchored" data-anchor-id="ukformsection">UkFormSection</h3>
+<blockquote class="blockquote">
+<pre><code> UkFormSection (title, description, *c, button_txt='Update',
+                outer_margin=6, inner_margin=6)</code></pre>
+</blockquote>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/Isaac-Flath\.github\.io\/fh-frankenui");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Isaac-Flath/fh-frankenui/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

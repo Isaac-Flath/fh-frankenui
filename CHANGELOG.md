@@ -2,7 +2,7 @@
 
 <!-- do not remove -->
 
-## 1.0.46
+## 1.0.47
 
 ### Bugs Squashed
 
@@ -310,5 +310,3 @@
 ### Bugs Squashed
 
 - Improve defaults for Navbar when components are passed so it doesn't override styling specified toby user  ([#43](https://github.com/AnswerDotAI/MonsterUI/pull/43))
-
-

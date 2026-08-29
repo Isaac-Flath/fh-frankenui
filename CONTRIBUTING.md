@@ -8,7 +8,7 @@ This is an [nbdev](https://nbdev.fast.ai/) library. The notebooks are located in
 
 ### Exporting the Modules
 
-You can use `nbdev_export` to export the notebooks to the library directory, `monsterui`.  
+You can use `nbdev-export` to export the notebooks to the library directory, `monsterui`.  
 
 ### Cleaning NB metadad
 
